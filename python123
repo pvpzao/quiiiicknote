@@ -1,0 +1,26 @@
+import sys
+import datetime
+
+def add_note(note, filename="quicknote.txt"):
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(filename, "a") as file:
+        file.write(f"{timestamp}: {note}\n")
+
+def list_notes(filename="quicknote.txt"):
+    with open(filename) as file:
+        notes = file.readlines()
+        for note in notes:
+            print(note.strip())
+
+def main():
+    if sys.argv[1] == "add":
+        note = " ".join(sys.argv[2:])
+        add_note(note)
+        print("Note added.")
+    elif sys.argv[1] == "list":
+        list_notes()
+    else:
+        print("Usage: python quicknote.py [add|list] [note]")
+
+if __name__ == "__main__":
+    main()
